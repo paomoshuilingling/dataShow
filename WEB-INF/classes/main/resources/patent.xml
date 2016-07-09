@@ -1,0 +1,317 @@
+<Schema name="patent_warehouse">
+ <Dimension type="TimeDimension" visible="true" highCardinality="false" name="Time">
+    <Hierarchy name="date" visible="true" hasAll="true" primaryKey="date_key">
+      <Table name="dim_date">
+      </Table>
+      <Level name="Year" visible="true" table="dim_date" column="year" type="String" uniqueMembers="false" levelType="TimeYears" hideMemberIf="Never">
+      </Level>
+      <Level name="Quater" visible="true" column="quarter" type="String" uniqueMembers="false" levelType="TimeQuarters" hideMemberIf="Never">
+      </Level>
+      <Level name="Month" visible="true" column="month" type="String" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
+      </Level>
+      <Level name="Day" visible="true" column="day" type="String" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="date weekly" visible="true" hasAll="true" primaryKey="date_key">
+      <Table name="dim_date">
+      </Table>
+      <Level name="Year" visible="true" column="year" type="String" uniqueMembers="false" levelType="TimeYears" hideMemberIf="Never">
+      </Level>
+      <Level name="week" visible="true" column="week" type="String" uniqueMembers="false" levelType="TimeWeeks" hideMemberIf="Never">
+      </Level>
+      <Level name="day_of_week" visible="true" column="day_of_week" type="String" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Area">
+    <Hierarchy visible="true" hasAll="true" primaryKey="aid">
+      <Table name="dim_area">
+      </Table>
+      <Level name="province" visible="true" column="province" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="city" visible="true" column="city" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="district" visible="true" column="district" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="&#20027;&#20998;&#31867;">
+    <Hierarchy visible="true" hasAll="true" primaryKey="ipc_id">
+      <Table name="dim_ipc">
+      </Table>
+      <Level name="section" visible="true" column="section" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="main class" visible="true" column="main_class" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="subclass" visible="true" column="subclass" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="main group" visible="true" column="main_group" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="subgroup" visible="true" column="subgroup" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="agent">
+    <Hierarchy visible="true" hasAll="true" primaryKey="pk_agent_id">
+      <Table name="dim_agent">
+      </Table>
+      <Level name="agent ID" visible="true" column="pk_agent_id" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="agent name" visible="true" column="agent_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="inventor">
+    <Hierarchy visible="true" hasAll="true" primaryKey="inventor_id">
+      <Table name="dim_inventor">
+      </Table>
+      <Level name="inventor_name" visible="true" column="inventor_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="patentee">
+    <Hierarchy visible="true" hasAll="true" primaryKey="patentee_id">
+      <Table name="dim_patentee">
+      </Table>
+      <Level name="patentee_name" visible="true" column="patentee_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="patent">
+    <Hierarchy visible="true" hasAll="true" primaryKey="pid">
+      <Table name="fact_patent">
+      </Table>
+      <Level name="&#19987;&#21033;ID" visible="true" column="pid" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="&#20027;&#20998;&#31867;&#21495;" visible="true" column="class_id" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="&#20844;&#24320;&#26085;" visible="true" column="pdate" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="&#30003;&#35831;&#26085;" visible="true" column="adate" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="&#20844;&#24320;&#26085;&#19982;&#30003;&#35831;&#26085;&#24046;" visible="true" column="p_a" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="&#19987;&#21033;&#21517;&#31216;" visible="true" column="patent_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="&#19987;&#21033;&#31867;&#22411;" visible="true" column="type" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="&#19987;&#21033;&#26159;&#21542;&#25480;&#26435;" visible="true" column="pright" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="&#19987;&#21033;&#26159;&#21542;&#22833;&#25928;" visible="true" column="invalid" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="&#22320;&#21306;">
+    <Hierarchy visible="true" hasAll="true" primaryKey="pid" primaryKeyTable="fact_patent">
+      <Join leftKey="area_id" rightKey="aid">
+        <Table name="fact_patent">
+        </Table>
+        <Table name="dim_area">
+        </Table>
+      </Join>
+      <Level name="area" visible="true" table="dim_area" column="city" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="TimeDimension" visible="true" highCardinality="false" name="&#20844;&#24320;&#26085;&#26399;">
+    <Hierarchy visible="true" hasAll="true" primaryKey="pid" primaryKeyTable="dim_public_date">
+      <Join leftKey="pdate" rightKey="date_key">
+        <Table name="dim_public_date">
+        </Table>
+        <Table name="dim_date">
+        </Table>
+      </Join>
+      <Level name="Year" visible="true" table="dim_date" column="year" type="String" uniqueMembers="false" levelType="TimeYears" hideMemberIf="Never">
+      </Level>
+      <Level name="Quater" visible="true" table="dim_date" column="quarter" type="String" uniqueMembers="false" levelType="TimeQuarters" hideMemberIf="Never">
+      </Level>
+      <Level name="Month" visible="true" table="dim_date" column="month" type="String" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
+      </Level>
+      <Level name="Day" visible="true" table="dim_date" column="day" type="String" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="TimeDimension" visible="true" highCardinality="false" name="&#30003;&#35831;&#26085;&#26399;">
+    <Hierarchy visible="true" hasAll="true" primaryKey="pid" primaryKeyTable="dim_apply_date">
+      <Join leftKey="adate" rightKey="date_key">
+        <Table name="dim_apply_date">
+        </Table>
+        <Table name="dim_date">
+        </Table>
+      </Join>
+      <Level name="Year" visible="true" table="dim_date" column="year" type="String" uniqueMembers="false" levelType="TimeYears" hideMemberIf="Never">
+      </Level>
+      <Level name="Quater" visible="true" table="dim_date" column="quarter" type="String" uniqueMembers="false" levelType="TimeQuarters" hideMemberIf="Never">
+      </Level>
+      <Level name="Month" visible="true" table="dim_date" column="month" type="String" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
+      </Level>
+      <Level name="Day" visible="true" table="dim_date" column="day" type="String" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="&#21457;&#26126;&#20154;">
+    <Hierarchy visible="true" hasAll="true" primaryKey="pid" primaryKeyTable="fact_inventor">
+      <Join leftKey="inventor_id" rightKey="inventor_id">
+        <Table name="fact_inventor">
+        </Table>
+        <Table name="dim_inventor">
+        </Table>
+      </Join>
+      <Level name="&#21457;&#26126;&#20154;" visible="true" table="dim_inventor" column="inventor_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="&#24635;&#20844;&#21496;">
+    <Hierarchy visible="true" hasAll="true" primaryKey="pid" primaryKeyTable="fact_patentee">
+      <Join leftKey="group_company_id" rightKey="group_company_id">
+        <Table name="fact_patentee">
+        </Table>
+        <Table name="dim_group_company">
+        </Table>
+      </Join>
+      <Level name="&#20844;&#21496;&#21517;" visible="true" table="dim_group_company" column="name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="&#20998;&#20844;&#21496;">
+    <Hierarchy visible="true" hasAll="true" primaryKey="pid" primaryKeyTable="fact_patentee">
+      <Join leftKey="patentee_id" rightKey="patentee_id">
+        <Table name="fact_patentee">
+        </Table>
+        <Table name="dim_patentee">
+        </Table>
+      </Join>
+      <Level name="&#26435;&#21033;&#20154;&#21517;&#23383;" visible="true" table="dim_patentee" column="patentee_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="&#20998;&#31867;&#21495;">
+    <Hierarchy visible="true" hasAll="true" primaryKey="pid" primaryKeyTable="fact_ipc">
+      <Join leftKey="ipc_id" rightKey="ipc_id">
+        <Table name="fact_ipc">
+        </Table>
+        <Table name="dim_ipc">
+        </Table>
+      </Join>
+      <Level name="section" visible="true" table="dim_ipc" column="section" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="main class" visible="true" table="dim_ipc" column="main_class" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="subclass" visible="true" table="dim_ipc" column="subclass" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="main group" visible="true" table="dim_ipc" column="main_group" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="subgroup" visible="true" table="dim_ipc" column="subgroup" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="&#19987;&#19994;&#20195;&#29702;">
+    <Hierarchy visible="true" hasAll="true" primaryKey="pk_agent_id">
+      <Table name="dim_agent">
+      </Table>
+      <Level name="&#20195;&#29702;&#21517;&#31216;" visible="true" column="agent_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Cube name="patent analysis" visible="true" cache="true" enabled="true">
+   <Table name="fact_patent">
+    </Table>
+    <DimensionUsage source="&#20027;&#20998;&#31867;" name="&#20027;&#20998;&#31867;" visible="true" foreignKey="class_id" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Area" name="&#22320;&#21306;" visible="true" foreignKey="area_id" highCardinality="false">
+    </DimensionUsage>
+    <Dimension type="StandardDimension" visible="true" highCardinality="false" name="&#19987;&#21033;&#20855;&#20307;&#39033;">
+      <Hierarchy visible="true" hasAll="true" primaryKey="pid" primaryKeyTable="fact_patent">
+        <Level name="&#19987;&#21033;ID" visible="true" table="fact_patent" column="pid" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="&#20027;&#20998;&#31867;&#21495;" visible="true" table="fact_patent" column="class_id" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="&#20844;&#24320;&#26085;" visible="true" table="fact_patent" column="pdate" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="&#30003;&#35831;&#26085;" visible="true" table="fact_patent" column="adate" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="&#20844;&#24320;&#26085;&#19982;&#30003;&#35831;&#26085;&#24046;" visible="true" table="fact_patent" column="p_a" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="&#19987;&#21033;&#21517;&#31216;" visible="true" table="fact_patent" column="patent_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="&#19987;&#21033;&#31867;&#22411;" visible="true" table="fact_patent" column="type" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="&#19987;&#21033;&#26159;&#21542;&#25480;&#26435;" visible="true" table="fact_patent" column="pright" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="&#19987;&#21033;&#26159;&#21542;&#22833;&#25928;" visible="true" table="fact_patent" column="invalid" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" highCardinality="false" name="&#19987;&#21033;&#31867;&#22411;">
+      <Hierarchy visible="true" hasAll="false" primaryKey="pid">
+        <Level name="&#19987;&#21033;&#31867;&#22411;" visible="true" column="type" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" highCardinality="false" name="&#19987;&#21033;&#26159;&#21542;&#25480;&#26435;">
+      <Hierarchy visible="true" hasAll="false" primaryKey="pid">
+        <Level name="&#19987;&#21033;&#26159;&#21542;&#25480;&#26435;" visible="true" column="pright" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" highCardinality="false" name="&#19987;&#21033;&#26159;&#21542;&#22833;&#25928;">
+      <Hierarchy visible="true" hasAll="false" primaryKey="pid">
+        <Level name="&#19987;&#21033;&#26159;&#21542;&#22833;&#25928;" visible="true" column="invalid" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+   </Dimension>
+   
+    <DimensionUsage source="&#21457;&#26126;&#20154;" name="&#21457;&#26126;&#20154;" visible="true" foreignKey="pid" highCardinality="false"> 
+    </DimensionUsage>
+<DimensionUsage source="&#24635;&#20844;&#21496;" name="&#24635;&#20844;&#21496;" visible="true" foreignKey="pid" highCardinality="false"> 
+    </DimensionUsage>
+    <DimensionUsage source="&#20998;&#20844;&#21496;" name="&#20998;&#20844;&#21496;" visible="true" foreignKey="pid" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="&#20998;&#31867;&#21495;" name="&#20998;&#31867;&#21495;" visible="true" foreignKey="pid" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="&#19987;&#19994;&#20195;&#29702;" name="&#19987;&#19994;&#20195;&#29702;" visible="true" foreignKey="agent_id" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="&#20844;&#24320;&#26085;&#26399;" name="&#20844;&#24320;&#26085;&#26399;" visible="true" foreignKey="pid" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="&#30003;&#35831;&#26085;&#26399;" name="&#30003;&#35831;&#26085;&#26399;" visible="true" foreignKey="pid" highCardinality="false">
+    </DimensionUsage>
+    <Measure name="&#19987;&#21033;&#25968;&#37327;" column="pid" datatype="Integer" aggregator="count" visible="true">
+    </Measure>
+  </Cube>
+ <Cube name="inventor analysis" visible="true" cache="true" enabled="true">
+    <Table name="fact_inventor">
+    </Table>
+    <DimensionUsage source="inventor" name="&#21457;&#26126;&#20154;" visible="true" foreignKey="pid" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="&#20844;&#24320;&#26085;&#26399;" name="&#20844;&#24320;&#26085;&#26399;" visible="true" foreignKey="pid" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="&#30003;&#35831;&#26085;&#26399;" name="&#30003;&#35831;&#26085;&#26399;" visible="true" foreignKey="pid" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="&#24635;&#20844;&#21496;" name="&#24635;&#20844;&#21496;" visible="true" foreignKey="pid" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="&#20998;&#20844;&#21496;" name="&#20998;&#20844;&#21496;" visible="true" foreignKey="pid" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="patent" name="&#19987;&#21033;&#20449;&#24687;" visible="true" foreignKey="pid" highCardinality="false">
+    </DimensionUsage>
+    <Measure name="&#21457;&#26126;&#20154;&#25968;&#37327;" column="inventor_id" aggregator="distinct-count" visible="true">
+    </Measure>
+  </Cube>
+<VirtualCube enabled="true" name="&#19987;&#21033;&#21644;&#21457;&#26126;" visible="true">
+    <VirtualCubeDimension visible="true" highCardinality="false" name="&#21457;&#26126;&#20154;">
+    </VirtualCubeDimension>
+    <VirtualCubeDimension visible="true" highCardinality="false" name="&#20844;&#24320;&#26085;&#26399;">
+    </VirtualCubeDimension>
+    <VirtualCubeDimension visible="true" highCardinality="false" name="&#24635;&#20844;&#21496;">
+    </VirtualCubeDimension>
+    <VirtualCubeDimension visible="true" highCardinality="false" name="&#20998;&#20844;&#21496;">
+    </VirtualCubeDimension>
+    <VirtualCubeDimension name="&#30003;&#35831;&#26085;&#26399;">
+    </VirtualCubeDimension>
+    <VirtualCubeMeasure cubeName="patent analysis" name="[Measures].[&#19987;&#21033;&#25968;&#37327;]" visible="true">
+    </VirtualCubeMeasure>
+    <VirtualCubeMeasure cubeName="inventor analysis" name="[Measures].[&#21457;&#26126;&#20154;&#25968;&#37327;]" visible="true">
+    </VirtualCubeMeasure>
+    <CalculatedMember name="&#20154;&#22343;&#20135;&#20986;" formatString="#,##0.00" formula="[Measures].[&#21457;&#26126;&#20154;&#25968;&#37327;] / [Measures].[&#19987;&#21033;&#25968;&#37327;]" dimension="Measures" visible="true">
+    </CalculatedMember>
+</VirtualCube>
+</Schema>
